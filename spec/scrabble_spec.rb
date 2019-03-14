@@ -6,5 +6,10 @@ describe Scrabble do
       scrabble = Scrabble.new('')
       expect(scrabble.score).to be_a Integer
     end
+
+    it 'returns 0 for an empty string' do
+      scrabble = Scrabble.new('')
+      expect(scrabble.score).to eq 0
+    end
   end
 end
