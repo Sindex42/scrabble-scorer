@@ -1,9 +1,7 @@
 class Scrabble
-  attr_reader :word, :letters, :score_table
-
   def initialize(word)
     @word = word
-    @letters = word.upcase.split('') if word.is_a?(String)
+    @letters = word.upcase.split('') if word_is_a_string?
     @word_score = 0
     @score_table = {
       1 => %w[A E I O U L N R S T],
@@ -17,10 +15,10 @@ class Scrabble
   end
 
   def score
-    return 0 unless word.is_a?(String)
+    return 0 unless word_is_a_string?
 
     letters.map do |letter|
-      return 0 unless /[A-Z]/.match?(letter)
+      return 0 unless character_is_a_letter?(letter)
 
       score_table.map do |letter_value, letter_group|
         if letter_group.include?(letter)
@@ -30,5 +28,17 @@ class Scrabble
     end
 
     @word_score
+  end
+
+  private
+
+  attr_reader :word, :letters, :score_table
+
+  def word_is_a_string?
+    word.is_a?(String)
+  end
+
+  def character_is_a_letter?(char)
+    /[A-Z]/.match?(char)
   end
 end
