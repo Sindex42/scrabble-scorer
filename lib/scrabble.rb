@@ -1,18 +1,31 @@
 class Scrabble
-  attr_reader :word, :score
+  attr_reader :word, :letters, :letter_score
 
   def initialize(word)
     @word = word
-    @score = {
+    @letters = word.upcase.split('') if word.is_a?(String)
+    @word_score = 0
+    @letter_score = {
       'A' => 1,
+      'S' => 1,
+      'T' => 1,
+      'R' => 1,
+      'E' => 1,
       'F' => 4
     }
   end
 
   def score
-    return 1 if word == 'a'
-    return 4 if word == 'f'
+    return 0 unless word.is_a?(String)
 
-    0
+    letters.map do |letter|
+      if letter_score.include?(letter)
+        @word_score += letter_score[letter]
+      else
+        return 0
+      end
+    end
+
+    word_score
   end
 end

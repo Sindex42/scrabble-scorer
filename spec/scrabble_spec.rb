@@ -33,5 +33,10 @@ describe Scrabble do
       scrabble = Scrabble.new('f')
       expect(scrabble.score).to eq 4
     end
+
+    it 'returns 6 for "street"' do
+      scrabble = Scrabble.new('street')
+      expect(scrabble.score).to eq 6
+    end
   end
 end
